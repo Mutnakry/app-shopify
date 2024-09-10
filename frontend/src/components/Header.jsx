@@ -1,24 +1,38 @@
 
-import cart from '../image/icons8-cart-24.png'
+import carticon from '../image/icons8-cart-24.png'
 import React, { useState, useEffect } from 'react'
 import user from '../image/icons8-user-50.png';
 import logout from '../image/icons8-logout-24.png';
+import { useCart } from '../pages/sale/CartContext';
 import Login from './Login';
 import Register from './Register';
+import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ isAuthenticated }) {
   const [isLoginForm, setIsInsertModalOpen] = useState(false);
   const [isRegisterForm, setIsRegisterForm] = useState(false);
   const [getphone, setphone] = useState('');
   const [username, setUsername] = useState('');
+
+
+  // Subtotal calculation: price minus discount, then multiplied by quantity
+  const { cart } = useCart();
+  const subtotal = cart.reduce((acc, item) =>
+    acc + ((item.sale_price - (item.sale_price * (item.discount * 0.01))) * item.quantity),
+    0
+  ).toFixed(2);
+
+  const totalcount = cart.reduce((acc, item) =>
+    acc + 1,
+    0
+  );
+
   useEffect(() => {
-    // Retrieve user type and username from local storage
     const userType = localStorage.getItem('phone');
     const storedUsername = localStorage.getItem('names');
     setphone(userType);
     setUsername(storedUsername);
   }, []);
-
 
   const openInsertModal = () => {
     setIsInsertModalOpen(true);
@@ -34,7 +48,7 @@ function Header() {
     localStorage.removeItem('rol');
     localStorage.removeItem('names');
     localStorage.removeItem('phone');
-    window.location.href = "/"; 
+    window.location.href = "/";
   };
 
   return (
@@ -61,41 +75,50 @@ function Header() {
         </button>
         <div className="flex items-center md:order-2 space-x-2 md:space-x-4 rtl:space-x-reverse">
           <div >
-          {!username &&
-            <a href="#" onClick={openInsertModal} className="flex items-center p-2 text-slate-50 rounded-lg dark:hover:bg-gray-700 group">
-              <img src={user} alt="User" className="h-6 w-6" />
-              <span className="flex-1 ms-3 whitespace-nowrap"> ចុះឈ្មោះ</span>
-            </a>}
+            {!username &&
+              <a href="#" onClick={openInsertModal} className="flex items-center p-2 text-slate-50 rounded-lg dark:hover:bg-gray-700 group">
+                <img src={user} alt="User" className="h-6 w-6" />
+                <span className="flex-1 ms-3 whitespace-nowrap"> ចុះឈ្មោះ</span>
+              </a>}
           </div>
-          <button type="button" className="flex text-sm  rounded-full border-2 border-cyan-50 " id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-            <span className="sr-only">Open user menu</span>
-            <img className="w-5 h-5 rounded-full" src={logout} alt="user photo" />
-          </button>
+          {username && (
+            <div className='flex space-x-4'>
+              <span className="block uppercase underline text-sm  cursor-wait text-white dark:text-white">{username}</span>
+              <button type="button" className="flex text-sm  rounded-full " id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                <span className="sr-only">Open user menu</span>
+                <img className="w-6 h-6 rounded-full" src={logout} alt="user photo" />
+              </button>
+              <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
 
-          <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                <div className="px-4 py-3">
+                  <span className="block text-sm text-gray-900 dark:text-white">ឈ្មោះ {username}</span>
+                  <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">លេខទូរស័ព្ទ {getphone}</span>
+                </div>
+                <ul className="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                  </li>
+                  <li>
+                    {/* <a href="/historyby{username}" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">ប្រវត្តិទិញទំនិញ</a> */}
+                    <Link to={`/historyby/${username}/${getphone}`}  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">ប្រវត្តិទិញទំនិញ</Link>
+                  </li>
+                  <li>
+                    <a href="#" onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
 
-            <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">ឈ្មោះ {username}</span>
-              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">លេខទូរស័ព្ទ {getphone}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <ul className="py-2" aria-labelledby="user-menu-button">
-              <li>
-                <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-              </li>
-
-              <li>
-                <a href="#" onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-              </li>
-            </ul>
-          </div>
-          <div className='mx-3 relative cursor-pointer hover:scale-125 duration-500'>
+          )}
+          <div className=' relative cursor-pointer hover:scale-125 duration-500'>
             <a href="/cart">
-              <img src={cart} alt="" className='h-8 w-8' />  <span className="absolute top-0 right-0 bg-white text-pink-600 text-xs w-4 h-4 rounded-full flex justify-center items-center">
-                2
-              </span>
+              <img src={carticon} alt="" className='h-8 w-8' />
+              <span className={`absolute top-0 right-0 bg-white text-pink-600 text-md w-4 h-4 rounded-full flex justify-center items-center ${subtotal === '0.00' ? 'disabled' : ''}`}>{totalcount}</span>
             </a>
           </div>
-          <span className='text-white'>$ 344.00</span>
+          {/*disabled style css */}
+          <span className={`text-white ${subtotal === '0.00' ? 'disabled' : ''}`}>$ {subtotal}</span>
+
         </div>
         <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4  rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -139,7 +162,7 @@ function Header() {
                   onClick={() => setIsRegisterForm(false)}
                   className={` font-semibold ${!isRegisterForm ? 'underline text-pink-600' : ' text-gray-800'}`}
                 >
-                   ចុះឈ្មោះ
+                  ចុះឈ្មោះ
                 </button>
                 <button
                   onClick={() => setIsRegisterForm(true)}

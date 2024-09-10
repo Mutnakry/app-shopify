@@ -34,6 +34,9 @@ app.use('/api/product', ProductRoutes);
 const authRoutes = require('./src/route/authRoute');
 app.use('/api/auth', authRoutes);
 
+// Import and use the order product routes
+const orderRoutes = require('./src/route/order.router');
+app.use('/api/order', orderRoutes); 
 
 // Start the server
 app.listen(port, () => {

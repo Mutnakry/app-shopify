@@ -48,7 +48,7 @@ const upload = multer({
 router.get('/', GetCategory);
 router.post('/', upload.single('file'), Createproduct);
 // router.get('/paginate', Paginate);
-// router.get('/:id', getCategorySingle);
+router.get('/:id', getCategorySingle);
 router.put('/:id', upload.single('file'), Updateproduct);
 router.delete('/:id', Deleteproduct);
 

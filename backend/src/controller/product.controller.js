@@ -59,16 +59,16 @@ exports.Createproduct = (req, res) => {
 
 
 //// Get categories
-// exports.getCategorySingle = (req, res) => {
-//   const id  = req.params.id;
-//   const query = 'SELECT * FROM categories where id=?';
-//   db.query(query,[id], (err, result) => {
-//     if (err) {
-//       return res.status(500).send('Error fetching categories');
-//     }
-//     res.json(result[0]);
-//   });
-// };
+exports.getCategorySingle = (req, res) => {
+  const id  = req.params.id;
+  const query = 'SELECT * FROM product where id=?';
+  db.query(query,[id], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error fetching categories');
+    }
+    res.json(result[0]);
+  });
+};
 
 
 // Update category
@@ -78,7 +78,7 @@ exports.Updateproduct = (req, res) => {
   let newImage = req.file ? req.file.filename : null;
 
   // Query to get the old image
-  db.query('SELECT image FROM categories WHERE id = ?', [id], (err, result) => {
+  db.query('SELECT image FROM product WHERE id = ?', [id], (err, result) => {
       if (err) return res.status(500).send('Error fetching old image');
       const oldImage = result[0].image;
 

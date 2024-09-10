@@ -4,7 +4,7 @@ import 'aos/dist/aos.css';
 import axios from 'axios';
 import Sale from '../pages/HomeProductSale'
 
-function Home({isAuthenticated}) {
+function Home({ isAuthenticated }) {
     const [categories, setCategories] = useState([])
 
     // mosion
@@ -56,7 +56,6 @@ function Home({isAuthenticated}) {
                             <div className='w-2/6  overflow-x-auto p-4'>
                                 <div className='flex justify-between whitespace-nowrap'>
                                     <p className='text-pink-700 text-nd font-normal hidden md:block'>ទិញទំនិញតាមផ្នែក</p>
-                                    <a href="" className='text-sm underline font-light'>មើលទាំងអស់</a>
                                 </div>
                                 <hr className='my-2 bg-gray-700' />
                                 <ul className="text-white">
@@ -218,9 +217,6 @@ function Home({isAuthenticated}) {
                                                     <p>ផ្សារទំនើប</p>
                                                     <p>10%</p>
                                                 </div>
-                                                <div className="absolute bottom-4 left-4 text-2xl cursor-pointer text-pink-700 font-bold">
-                                                    by <span className="ml-2">&rarr;</span>
-                                                </div>
                                                 <img
                                                     src="https://static.vecteezy.com/system/resources/thumbnails/008/472/909/small/beautiful-young-asian-woman-with-shopping-bags-file-png.png"
                                                     alt="Character"
@@ -234,9 +230,6 @@ function Home({isAuthenticated}) {
                                                     <p>ដឹកជញ្ជូនអាហារ</p>
                                                     <p>50%</p>
                                                 </div>
-                                                <div className="absolute bottom-4 left-4 text-2xl cursor-pointer text-pink-700 font-bold">
-                                                    by <span className="ml-2">&rarr;</span>
-                                                </div>
                                                 <img
                                                     src="https://png.pngtree.com/png-vector/20230907/ourmid/pngtree-happy-shopper-selling-shopping-png-image_9206556.png"
                                                     alt="Character"
@@ -249,9 +242,6 @@ function Home({isAuthenticated}) {
                                                 <div className='flex font-semibold text-xl absolute justify-between text-green-400 px-2 w-full'>
                                                     <p>ហ្វេសិន និងសម្រស់</p>
                                                     <p>25%</p>
-                                                </div>
-                                                <div className="absolute bottom-4 left-4 text-2xl cursor-pointer text-pink-700 font-bold">
-                                                    by <span className="ml-2">&rarr;</span>
                                                 </div>
                                                 <img
                                                     src="https://static.vecteezy.com/system/resources/thumbnails/008/476/780/small/asian-woman-with-her-shopping-bags-file-png.png"

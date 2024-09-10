@@ -50,6 +50,7 @@ import HomeProductSale from './pages/HomeProductSale';
 import { ToastContainer } from 'react-toastify';
 import Test from './pages/Test'
 import './App.css';
+import HistoryByProduct from './pages/HistoryByProduct';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,6 +69,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='hover' element={<HoverModal />} />
             <Route path='test' element={<Test isAuthenticated={isAuthenticated}/>} />
+            <Route path='/historyby/:username/:phone' element={<HistoryByProduct isAuthenticated={isAuthenticated}/>} />
             <Route path='cart' element={<Cart />} />
             <Route path='homeproductsale' element={<HomeProductSale isAuthenticated={isAuthenticated} />} />
           </Route>

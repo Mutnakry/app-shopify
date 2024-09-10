@@ -29,12 +29,12 @@ function HomeProductSale({ isAuthenticated }) {
         if (isAuthenticated) {
             addItem(products);
         } else {
-            alert('You must be logged in to add items to the cart.');
-            navigate('/login');
+            toast.error(`សូមលោកអ្នកចុះឈ្មោះជាមិនសិន`, {
+                position: "top-center",
+                autoClose: 3000,
+            });
         }
-        // addItem(products);
     };
-
 
     return (
         <div className='mt-14'>

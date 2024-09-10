@@ -11,9 +11,6 @@ function Cart({isAuthenticated}) {
                         <a href="/"><h2 class="text-2xl font-semibold">ទិញ​ឥវ៉ាន់</h2></a>
                         <p class="text-sm text-gray-500">ទំនិញ អនទ្បាញ</p>
                     </div>
-                    <div class="flex items-center mb-4">
-                        <a href="/"> <h3 class="ml-2 text-lg text-white font-semibold bg-fuchsia-700 py-2 px-12 rounded-full">បន្តទិញទំនិញ</h3></a>
-                    </div>
                     <UseCart/>
                 </div>
 

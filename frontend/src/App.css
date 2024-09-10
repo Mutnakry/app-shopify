@@ -12,3 +12,12 @@
 .scrollbar-hidden::-webkit-scrollbar {
     display: none;  /* Safari and Chrome */
 }
+
+
+
+.disabled {
+    color: gray; /* Or any other style to indicate disabled state */
+    pointer-events: none; /* Prevents interaction */
+    display: none;
+    cursor: not-allowed; /* Changes cursor to indicate disabled state */
+  }
