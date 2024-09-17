@@ -6,7 +6,9 @@ const {
   Createproduct,
   Updateproduct,
   GetCategory,
-  Paginate,
+  Getdiscount,
+  getProductSingle_category_id,
+  getproductSingleupdate,
   getCategorySingle
 } = require('../controller/product.controller');
 
@@ -46,9 +48,12 @@ const upload = multer({
 });
 
 router.get('/', GetCategory);
+router.get('/discount', Getdiscount);
 router.post('/', upload.single('file'), Createproduct);
-// router.get('/paginate', Paginate);
+// router.get('/paginate', Paginate);getProductSingle_category_id
 router.get('/:id', getCategorySingle);
+router.get('/update/:id', getproductSingleupdate);
+router.get('/categoryid/:id', getProductSingle_category_id);
 router.put('/:id', upload.single('file'), Updateproduct);
 router.delete('/:id', Deleteproduct);
 

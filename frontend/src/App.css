@@ -5,19 +5,25 @@
 
 /* Add this in your CSS file (e.g., src/index.css or src/App.css) */
 .scrollbar-hidden {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
+    display: none;
+    /* Safari and Chrome */
 }
 
 
 
 .disabled {
-    color: gray; /* Or any other style to indicate disabled state */
-    pointer-events: none; /* Prevents interaction */
+    color: gray;
+    /* Or any other style to indicate disabled state */
+    pointer-events: none;
+    /* Prevents interaction */
     display: none;
-    cursor: not-allowed; /* Changes cursor to indicate disabled state */
-  }
+    cursor: not-allowed;
+    /* Changes cursor to indicate disabled state */
+}

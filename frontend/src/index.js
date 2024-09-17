@@ -20,6 +20,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { CartProvider } from './pages/sale/CartContext'; // Adjust the import path as necessary
+const flowbite = require("flowbite-react/tailwind");
 
 ReactDOM.render(
     <CartProvider>

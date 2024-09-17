@@ -55,16 +55,28 @@ exports.CreateCategory = (req, res) => {
 };
 
 //// Get categories
-// exports.getCategorySingle = (req, res) => {
-//   const id  = req.params.id;
-//   const query = 'SELECT * FROM categories where id=?';
-//   db.query(query,[id], (err, result) => {
-//     if (err) {
-//       return res.status(500).send('Error fetching categories');
-//     }
-//     res.json(result[0]);
-//   });
-// };
+exports.getCategorySingle = (req, res) => {
+  const id  = req.params.id;
+  const query = 'SELECT * FROM categories where id=?';
+  db.query(query,[id], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error fetching categories');
+    }
+    res.json(result[0]);
+  });
+};
+
+// Controller: Get categories based on the 'detail' query parameter
+exports.getCategoryByDetail = (req, res) => {
+  const id = req.params.id; 
+  const query = 'SELECT * FROM categories WHERE detail=?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error fetching categories');
+    }
+    res.json(result);
+  });
+};
 
 
 // Update category

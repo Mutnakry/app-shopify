@@ -7,6 +7,7 @@ const {
   UpdateCategory,
   GetCategory,
   Paginate,
+  getCategoryByDetail,
   getCategorySingle
 } = require('../controller/category.controller');
 
@@ -47,8 +48,8 @@ const upload = multer({
 
 router.get('/', GetCategory);
 router.post('/', upload.single('file'), CreateCategory);
-// router.get('/paginate', Paginate);
-// router.get('/:id', getCategorySingle);
+router.get('/detail/:id', getCategoryByDetail);
+router.get('/:id', getCategorySingle);
 router.put('/:id', upload.single('file'), UpdateCategory);
 router.delete('/:id', DeleteCategory);
 

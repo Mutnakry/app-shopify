@@ -56,17 +56,40 @@ exports.Createproduct = (req, res) => {
   });
 };
 
-
-
-//// Get categories
-exports.getCategorySingle = (req, res) => {
+//// Get  product category detail
+exports.getproductSingleupdate = (req, res) => {
   const id  = req.params.id;
-  const query = 'SELECT * FROM product where id=?';
+  const query = 'SELECT * FROM product  WHERE id=?';
   db.query(query,[id], (err, result) => {
     if (err) {
       return res.status(500).send('Error fetching categories');
     }
-    res.json(result[0]);
+    res.json(result);
+  });
+};
+
+//// Get  product category detail
+exports.getCategorySingle = (req, res) => {
+  const detail  = req.params.id;
+  const query = 'SELECT pro.*,cat.detail FROM product as pro INNER JOIN categories as cat on pro.category_id=cat.id WHERE cat.detail = ?';
+  db.query(query,[detail], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error fetching categories');
+    }
+    res.json(result);
+  });
+};
+
+
+//// Get  product category id category
+exports.getProductSingle_category_id = (req, res) => {
+  const detail  = req.params.id;
+  const query = 'SELECT pro.*,cat.detail FROM product as pro INNER JOIN categories as cat on pro.category_id=cat.id WHERE pro.category_id = ?';
+  db.query(query,[detail], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error fetching categories');
+    }
+    res.json(result);
   });
 };
 
@@ -128,6 +151,17 @@ exports.Deleteproduct = (req, res) => {
   db.query(query, [id], (err, result) => {
     if (err) {
       return res.status(500).send('Error deleting category');
+    }
+    res.json(result);
+  });
+};
+
+
+exports.Getdiscount = (req, res) => {
+  const query = 'SELECT pro.*,cat.detail FROM `product` as pro inner join categories as cat on pro.category_id = cat.id   WHERE `discount` BETWEEN 1 AND 100';
+  db.query(query, (err, result) => {
+    if (err) {
+      return res.status(500).send('Error fetching categories');
     }
     res.json(result);
   });
